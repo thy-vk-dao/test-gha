@@ -1,0 +1,41 @@
+on:
+  workflow_dispatch:
+    inputs:
+      enableBE:
+        description: 'Enable service BE'
+        required: true
+        default: true
+        type: choice
+        options:
+        - true
+        - false
+      enableFE:
+        description: 'Enable service FE'
+        required: true
+        default: true
+        type: choice
+        options:
+        - true
+        - false
+      enableC2FS:
+        description: 'Enable service C2FS'
+        required: true
+        default: true
+        type: choice
+        options:
+        - true
+        - false
+
+
+jobs:
+  log-the-inputs:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Enable BE: $ENABLE_BE"
+          echo "Enable FE: $ENABLE_FE"
+          echo "Enable C2FS: $ENABLE_C2FS"
+        env:
+          ENABLE_BE: ${{ inputs.enableBE }}
+          ENABLE_FE: ${{ inputs.enableFE }}
+          ENABLE_C2FS: ${{ inputs.enableC2FS }}
